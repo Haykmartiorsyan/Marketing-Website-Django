@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+{% load static %}
+    <!--Page Cover-->
+  	<section class="row page-cover" data-bgimage="{% static 'images/page-cover/4.jpg' %}">
+  		<div class="row m0">
+  			<div class="container">
+				<h2 class="page-title">case studies</h2>
+			</div>
+  		</div>
+  	</section>
+
+  	<section class="row case-studies">
+  		<div class="container">
+
+            <ul class="gallery-filter list-unstyled">
+				<li data-filter class="active">all</li>
+                {% for case_category in case_categoryes %}
+				<li data-filter=".{{ case_category.name }}">{{ case_category.name }}</li>
+                {% endfor %}
+			</ul>
+
+            <div class="row">
+                <div class="filterable-gallery case-gallery row-style">
+                    <div class="grid-sizer col-md-4 col-sm-6"></div>
+                    {% for case in cases %}
+                    <!--Item-->
+                    <div class="gallery-item case-item {{ case.category.name }} col-md-4 col-sm-6">
+                    	<div class="inner row">
+                    		<div class="img-holder row"><img src="{{ case.image.url }}" alt=""></div>
+                    		<div class="content-box">
+								<h5 class="this-title">{{ case.name }}</h5>
+                   				<p class="this-summary">{{ case.short_description }}</p>
+                   				<a href="/cases/{{case.id}}/" class="more">read more</a>
+                    		</div>
+                    		<div class="hover-trigger"><img src="{% static 'images/icons/service/10.png' %}" alt=""></div>
+                    	</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+  		</div>
+  	</section>
+
+{% endblock %}

@@ -1,0 +1,261 @@
+{% extends 'base/base.html' %}
+
+{%block content%}
+{%load static%}
+    {% load i18n %}
+	<!--Slider Area-->
+  	<section class="row main-slider-area">
+  		<div id="slider1" class="rev_slider" data-version="5.0">
+  			<ul>
+                {% for slider_image in slider_images %}
+  				<li data-transition="scaledownfromleft" data-title="Next">
+  					<img src="{{ slider_image.image.url }}"
+						 alt=""
+						 data-bgposition="center center"
+						 data-bgfit="cover"
+						 data-bgrepeat="no-repeat"
+						 class="rev-slidebg" data-no-retina>
+
+					<div class="tp-caption welcome-Title tp-resizeme"
+						data-x="left"
+						data-hoffset="0"
+						data-y="top"
+						data-voffset="['0','0','0','0,'0','20']"
+						data-fontsize="['42','36','32','30','30','24']"
+						data-lineheight="['50','42','38','36','36','30']"
+						data-width="none"
+						data-height="none"
+						data-whitespace="nowrap"
+						data-transform_idle="o:1;"
+						data-transform_in="x:-50px;opacity:0;s:1000;e:Power2.easeOut;"
+						data-transform_out="opacity:0;s:1500;e:Power4.easeIn;"
+						data-start="1000"
+						data-splitin="none"
+						data-splitout="none"
+						data-responsive_offset="on">{{ slider_image.name }}
+					</div>
+
+					<div class="tp-caption welcome-Content tp-resizeme"
+						data-x="left"
+						data-hoffset="0"
+						data-y="top"
+						data-voffset="['155','125','120','125','125']"
+						data-fontsize="16"
+						data-lineheight="['30','24','24','24','24','24']"
+						data-width="['458','458','458','400','400','290']"
+						data-height="none"
+						data-whitespace="normal"
+						data-transform_idle="o:1;"
+						data-transform_in="x:-50px;opacity:0;s:1000;e:Power2.easeOut;"
+						data-transform_out="opacity:0;s:1500;e:Power4.easeIn;"
+						data-start="1500"
+						data-splitin="none"
+						data-splitout="none"
+						data-responsive_offset="on">{{ slider_image.description }}</div>
+
+					<a href="#" class="tp-caption welcome-Link btn btn-primary tp-resizeme"
+						data-x="left"
+						data-hoffset="['0','0','0','0']"
+						data-y="top"
+						data-voffset="['260','200','200','200','220']"
+						data-fontsize="16"
+						data-lineheight="48"
+						data-width="none"
+						data-height="none"
+						data-whitespace="nowrap"
+						data-transform_idle="o:1;"
+						data-transform_in="x:-50px;opacity:0;s:1000;e:Power2.easeOut;"
+						data-transform_out="opacity:0;s:1500;e:Power4.easeIn;"
+						data-start="1500"
+						data-splitin="none"
+						data-splitout="none"
+						data-responsive_offset="on">free analysis
+					</a>
+  				</li>
+                {% endfor %}
+  			</ul>
+  		</div>
+  	</section>
+
+  	<!--Feature Services Blocks-->
+  	<section class="row featured-service-blocks">
+  		<div class="container">
+        {% for service in top_services %}
+  			<div class="col-md-4 featured-service-block">
+  				<div class="icon-holder"><img src="{{ service.image.url }}" alt=""></div>
+  				<h3 class="this-title"><a href="{% url 'Services:index' %}">{{ service.title }}</a></h3>
+  				<p class="this-summary">{{ service.short_description }}</p>
+  				<a href="{% url 'Services:index' %}" class="this-expand"><img src="{% static 'images/icons/service/10.png' %}" alt=""></a>
+  			</div>
+            {% endfor %}
+  		</div>
+  	</section>
+
+  	<!--Expertise Section-->
+  	<section class="row our-experties">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">{% trans 'Marketing Solutions That Work' %}</h2>
+  				<p>We are Search Engine &amp; Social Media Experts</p>
+  			</div>
+
+  			<div class="row expertise-intro text-center">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention of customers</div>
+
+  			<div class="expertise-circle row text-center">
+  				<div class="block pos-left top-block">We have the experience for your project</div>
+  				<div class="block pos-left bottom-block">We know how to save you time and money</div>
+  				<img src="{% static 'images/expertise-circle.png' %}" alt="" class="img-circle">
+  				<div class="block pos-right top-block">We will bring you new pre-qualified customers</div>
+  				<div class="block pos-right bottom-block">We have the experience for your project</div>
+  			</div>
+  		</div>
+  	</section>
+
+  	<!--Service Block-->
+  	<section class="row our-services">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">Our Services Keeps you Happy</h2>
+  				<p>We are Search Engine &amp; Social Media Experts</p>
+  			</div>
+
+  			<div class="service-blocks row">
+            {% for service in center_services %}
+  				<div class="col-sm-4 service-block">
+  					<div class="row inner">
+  						<div class="icon-holder row" data-icon="{{ service.color.index }}"><img src="{{ service.image.url }}" alt=""></div>
+						<h3 class="this-title">{{ service.title }}</h3>
+						<p class="this-summary">{{ service.short_description }}</p>
+						<a href="/services/{{service.id}}/" class="more">Read More</a>
+  					</div>
+  				</div>
+                {% endfor %}
+  			</div>
+
+  		</div>
+  	</section>
+
+  	<!--Service Block-->
+  	<section class="row more-services">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">We also Offer below Services</h2>
+  				<p>We are Search Engine &amp; Social Media Experts</p>
+  			</div>
+
+  			<div class="row more-service-blocks">
+  				{% for service in all_services %}
+  				<div class="col-sm-4 service-block2">
+  					<div class="row icon-holder"><img src="{{ service.image.url }}" alt=""></div>
+  					<h4 class="this-title">{{ service.title }}</h4>
+					<p class="this-summary">{{ service.short_description }}</p>
+  				</div>
+                {% endfor %}
+
+
+  			</div>
+  		</div>
+  	</section>
+
+  	<!--Testimonial-->
+  	<section class="row testimonials">
+  		<div class="container">
+  			<div class="row quote-sign text-center"><img src="{% static 'images/quote-sign.png' %}" alt=""></div>
+  			<div class="row">
+  				<div class="testimonial-slides">
+                    {% for testimonial in testimonials %}
+  					<div class="item">
+  						<div class="row client-img"><img src="{{ testimonial.image.url }}" alt=""></div>
+  						<div class="row quotes">“ {{ testimonial.description }} "</div>
+  						<h4 class="client-id">{{ testimonial.name }}, <span>{{ testimonial.profession }}</span></h4>
+  					</div>
+                    {% endfor %}
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
+  	<!--Project Case Studies-->
+  	<section class="row project-studies">
+  		<div class="container">
+  			<div class="row sectionTitle white">
+  				<h2 class="this-title">Case Studies of Our Projects</h2>
+  				<p>We provide our 100% to make a good website</p>
+  			</div>
+  			<div class="row project-studies-box">
+  				<div class="studies-blocks row">
+					<div class="blocks-box">
+						<!--Block-->
+						<div class="study-block">
+							<div class="block-inner row">
+								<div class="row rotate-back">
+									<div class="bg-img row"><a href="single-case.html"><img src="{% static 'images/studies/1.jpg' %}" alt="" class="shot"></a></div>
+									<div class="row study-about">
+										<div class="row client-logo"><a href="single-case.html"><img src="{% static 'images/studies/1.png' %}" alt=""></a></div>
+										<a href="single-case.html"><h4 class="this-case">Digital Agency</h4></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--Block-->
+						<div class="study-block">
+							<div class="block-inner row">
+								<div class="row rotate-back">
+									<div class="bg-img row"><a href="single-case.html"><img src="{% static 'images/studies/1.jpg' %}" alt="" class="shot"></a></div>
+									<div class="row study-about">
+										<div class="row client-logo"><a href="single-case.html"><img src="{% static 'images/studies/1.jpg' %}" alt=""></a></div>
+										<a href="single-case.html"><h4 class="this-case">Digital Agency</h4></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--Block-->
+						<div class="study-block">
+							<div class="block-inner row">
+								<div class="row rotate-back">
+									<div class="bg-img row"><a href="single-case.html"><img src="{% static 'images/studies/1.jpg' %}" alt="" class="shot"></a></div>
+									<div class="row study-about">
+										<div class="row client-logo"><a href="single-case.html"><img src="{% static 'images/studies/1.jpg' %}" alt=""></a></div>
+										<a href="single-case.html"><h4 class="this-case">Digital Agency</h4></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--Block-->
+						<div class="study-block">
+							<div class="block-inner row">
+								<div class="row rotate-back">
+									<div class="bg-img row"><a href="single-case.html"><img src="{% static 'images/studies/1.jpg' %}" alt="" class="shot"></a></div>
+									<div class="row study-about">
+										<div class="row client-logo"><a href="single-case.html"><img src="{% static 'images/studies/1.jpg' %}" alt=""></a></div>
+										<a href="single-case.html"><h4 class="this-case">Digital Agency</h4></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+  			</div>
+  		</div>
+  	</section>
+
+  	<!--Served Clients-->
+  	<section class="served-clients row">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">We also Offer below Services</h2>
+  				<p>We provide our 100% to make a good website</p>
+  			</div>
+  			<div class="row">
+  				<div class="col-xs-4 col-sm-2 served-client"><a href="#"><img src="{% static 'images/clients/3.png' %}" alt=""></a></div>
+  				<div class="col-xs-4 col-sm-2 served-client"><a href="#"><img src="{% static 'images/clients/3.png' %}" alt=""></a></div>
+  				<div class="col-xs-4 col-sm-2 served-client"><a href="#"><img src="{% static 'images/clients/3.png' %}" alt=""></a></div>
+  				<div class="col-xs-4 col-sm-2 served-client"><a href="#"><img src="{% static 'images/clients/3.png' %}" alt=""></a></div>
+  				<div class="col-xs-4 col-sm-2 served-client"><a href="#"><img src="{% static 'images/clients/3.png' %}" alt=""></a></div>
+  				<div class="col-xs-4 col-sm-2 served-client"><a href="#"><img src="{% static 'images/clients/3.png' %}" alt=""></a></div>
+  			</div>
+  		</div>
+  	</section>
+
+
+{% endblock %}

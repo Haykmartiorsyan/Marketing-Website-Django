@@ -1,0 +1,184 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!--Page Cover-->
+  	<section class="row page-cover" data-bgimage="{% static 'images/page-cover/2.jpg' %}">
+  		<div class="row m0">
+  			<div class="container">
+				<h2 class="page-title">Post</h2>
+			</div>
+  		</div>
+  	</section>
+
+  	<section class="row blog-content">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-md-8 blog-part">
+
+  					<article class="post post-format-image single-post row">
+  						<header class="post-header row">
+  							<div class="row this-title">
+  								<a href="#" class="post-date">
+  									<span class="date-wrapper">
+  										<span class="dd">{{ day }}</span>
+  										<span class="mm-yy">{{ month }}.<br>{{ year }}</span>
+  									</span>
+  								</a>
+  								<div class="title-link"><h3 class="title">{{ post.title }}</h3></div>
+  							</div>
+  							<ul class="post-meta list-unstyled">
+  								<li><i class="fa fa-user"></i>By {{ post.author }}</li>
+  								<li><i class="fa fa-comments"></i>
+                                    {%if post.comments.count == 1 %}
+                                {{post.comments.count}}
+                                Comment
+                                {%elif post.comments.count == 0%}
+                                Comments
+                                {%else%}
+                                {{post.comments.count}}
+                                Comments
+                                {%endif%}
+                                </li>
+  								<li><i class="fa fa-tags"></i><a href="/blog/?q={{post.tag}}">{{ post.tag }}</a></li>
+  							</ul>
+  						</header>
+  						<div class="post-body row">
+  							<div class="featured-content row">
+  								<img src="{{ post.image.url }}" alt="">
+  							</div>
+  							<div class="row this-summary this-contents">
+								<p>{{ post.description }}</p>
+                            </div>
+  						</div>
+  					</article>
+
+  					<ul class="pager blog-pager">
+  						<li class="previous">
+  							<a href="#" class="direction">
+  								<i class="fa fa-long-arrow-left"></i>PREVIOUS POST
+  								<h4 class="post-title">Heading Title of Post</h4>
+  							</a>
+  						</li>
+  						<li class="next">
+  							<a href="{{ prew_post }}" class="direction">
+  								NEXT POST<i class="fa fa-long-arrow-right"></i>
+  								<h4 class="post-title">Heading Title of Post</h4>
+  							</a>
+  						</li>
+  					</ul>
+
+  					<h4 class="related-post-title">related post</h4>
+  					<div class="row related-posts">
+  						{% for post in latest_post %}
+  						<div class="col-sm-6 r-post">
+  							<a href="/blog/{{ post.id }}"><img src="{{ post.image.url }}" alt="" class="this-img"></a>
+  							<a href="/blog/{{ post.id }}"><h4 class="this-title">{{ post.short_description }}</h4></a>
+  						</div>
+                        {% endfor %}
+  					</div>
+
+  					<h4 class="comments-title">
+                        {%if post.comments.count == 1 %}
+                                {{post.comments.count}}
+                                Comment
+                                {%elif post.comments.count == 0%}
+                                Comments
+                                {%else%}
+                                {{post.comments.count}}
+                                Comments
+                                {%endif%}
+                    </h4>
+                {%for comment in post.comments.all%}
+  					<div class="media comment">
+
+  						<div class="media-body">
+  							<h4><a href="#" class="this-title">{{comment.name}}</a><small class="this-meta">{{ comment.created }}</small></h4>
+							<p>{{ comment.message }}</p>
+  						</div>
+  					</div>
+                    {%empty%}
+                                <p>Not comment to view</p>
+                {% endfor %}
+
+  					<h4 class="leave-comment-title">leave a comment</h4>
+
+  					<form action="" method="post" class="comment-form row" role="form">{% csrf_token %}
+  						<div class="col-sm-6 form-group">
+  							<label for="name">First Name</label>
+  							<input type="text" id="fname" class="form-control">
+  						</div>
+  						<div class="col-sm-6 form-group">
+  							<label for="last_name">Last Name</label>
+  							<input type="text" id="lname" class="form-control">
+  						</div>
+  						<div class="col-sm-6 form-group">
+  							<label for="email">Email</label>
+  							<input type="email" id="email" class="form-control">
+  						</div>
+  						<div class="col-sm-6 form-group">
+  							<label for="subject">Subject</label>
+  							<input type="text" id="subject" class="form-control">
+  						</div>
+  						<div class="col-sm-12 form-group">
+  							<label for="message">Message</label>
+  							<textarea name="message" id="message" class="form-control"></textarea>
+  						</div>
+  						<div class="col-sm-12">
+  							<input type="submit" class="btn btn-success btn-default" value="submit">
+  						</div>
+  					</form>
+  				</div>
+
+  				<div class="col-md-4 sidebar post-sidebar">
+                    <div class="row m0 widget widget-search">
+                        <h4 class="widget-title">search</h4>
+                        <form action="/blog/" class="row m0 search-form" method="get" role="search">
+                            <div class="input-group">
+                                <input type="search" name="q" value="{{request.GET.q}}" class="form-control" placeholder="Search here">
+                                <span class="input-group-addon"><button type="submit"><i class="fa fa-search"></i></button></span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row m0 widget widget-category">
+                        <h4 class="widget-title">categories</h4>
+                        <ul class="nav widget-nav">
+                            {%for category in post_category%}
+                            <li><a href="/blog/?q={{category.name}}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="row m0 widget widget-popular-posts">
+                        <h4 class="widget-title">popular post</h4>
+
+                        {%for post in latest_post%}
+                        <div class="media popular-post">
+                            <div class="media-body">
+                                <h5 class="this-title"><a href="/blog/{{ post.id }}">{{post.title}}</a></h5>
+                                <h5 class="by-date">
+                                	By <a href="#" class="by">{{ post.author }}</a>
+                                	<a href="#" class="pull-right">
+                                         {%if post.comments.count == 1 %}
+                                {{post.comments.count}}
+                                Comment
+                                {%elif post.comments.count == 0%}
+                                <p></p>
+                                {%else%}
+                                {{post.comments.count}}
+                                Comments
+                                {%endif%}
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+  			</div>
+  		</div>
+  	</section>
+
+{% endblock %}

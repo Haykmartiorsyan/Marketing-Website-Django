@@ -1,0 +1,137 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!--Page Cover-->
+  	<section class="row page-cover" data-bgimage="{% static 'images/page-cover/2.jpg' %}">
+  		<div class="row m0">
+  			<div class="container">
+				<h2 class="page-title">Blog</h2>
+			</div>
+  		</div>
+  	</section>
+
+  	<section class="row blog-content">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-md-8 blog-part">
+                    {%if post_page%}
+                        {% for post in post_page%}
+  					<article class="post post-format-image row">
+  						<header class="post-header row">
+  							<div class="row this-title">
+  								<a href="#" class="post-date">
+  									<span class="date-wrapper">
+  										<span class="dd">{{ day }}</span>
+  										<span class="mm-yy">{{ month }}.<br>{{ year }}</span>
+  									</span>
+  								</a>
+  								<a href="/blog/{{ post.id }}" class="title-link"><h3 class="title">{{ post.title }}</h3></a>
+  							</div>
+  							<ul class="post-meta list-unstyled">
+  								<li><i class="fa fa-user"></i>By {{ post.author }}</li>
+  								<li><i class="fa fa-comments"></i>
+                                    {%if post.comments.count == 1 %}
+                                {{post.comments.count}}
+                                Comment
+                                {%elif post.comments.count == 0%}
+                                Comments
+                                {%else%}
+                                {{post.comments.count}}
+                                Comments
+                                {%endif%}
+                                </li>
+  								<li><i class="fa fa-tags"></i><a href="?q={{post.tag}}">{{ post.tag }}</a></li>
+  							</ul>
+  						</header>
+  						<div class="post-body row">
+  							<div class="featured-content row">
+  								<img src="{{ post.image.url }}" alt="">
+  							</div>
+  							<div class="row this-summary">
+  								 {{ post.short_description }}
+  							</div>
+  							<a href="/blog/{{ post.id }}" class="btn btn-primary">read more</a>
+  						</div>
+  					</article>
+                    {% endfor %}
+                {% else %}
+                        <section class="default-section  bg-color outside-hidden">
+                        <div class="sec-title text-center main-title">
+                            <h1 class="default-title text-uppercase">Post Not Found</h1>
+                        </div>
+                        </section>
+                         {%endif%}
+
+                {% if post_page.has_other_pages %}
+                      <ul  class="pagination">
+                        {% if post_page.has_previous %}
+                          <li><a href="?page={{ post_page.previous_page_number }}{%if request.GET.q%}&{{request.GET.q}}{%endif%}"><span class="fa fa-angle-left"></span>&ensp;PREV&ensp;</a></li>
+                        {% endif %}
+                        {% for i in post_page.paginator.page_range %}
+                          {% if post_page.number == i %}
+                            <li class="active"><a href="?page={{ i }}" ><span>{{ i }} <span class="sr-only">(current)</span></span></a></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if post_page.has_next %}
+                          <li><a href="?page={{ post_page.next_page_number }}{%if request.GET.q%}&{{request.GET.q}}{%endif%}">&ensp;NEXT&ensp; <span class="fa fa-angle-right"></span> </a></li>
+
+                        {% endif %}
+                      </ul>
+                    {% endif %}
+
+  				</div>
+
+  				<div class="col-md-4 sidebar post-sidebar">
+                    <div class="row m0 widget widget-search">
+                        <h4 class="widget-title">search</h4>
+                        <form action="" class="row m0 search-form" method="get" role="search">
+                            <div class="input-group">
+                                <input type="search" name="q" value="{{request.GET.q}}" class="form-control" placeholder="Search here">
+                                <span class="input-group-addon"><button type="submit"><i class="fa fa-search"></i></button></span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row m0 widget widget-category">
+                        <h4 class="widget-title">categories</h4>
+                        <ul class="nav widget-nav">
+                           {%for category in post_category%}
+                            <li><a href="?q={{category.name}}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="row m0 widget widget-popular-posts">
+                        <h4 class="widget-title">popular post</h4>
+                        {%for post in latest_post%}
+                        <div class="media popular-post">
+                            <div class="media-body">
+                                <h5 class="this-title"><a href="/blog/{{post.id}}/">{{post.title}}</a></h5>
+                                <h5 class="by-date">
+                                	By <a href="#" class="by">{{ post.author }}</a>
+                                	<a href="#" class="pull-right">
+                                         {%if post.comments.count == 1 %}
+                                {{post.comments.count}}
+                                Comment
+                                {%elif post.comments.count == 0%}
+                                <p></p>
+                                {%else%}
+                                {{post.comments.count}}
+                                Comments
+                                {%endif%}
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+  			</div>
+  		</div>
+  	</section>
+
+{% endblock %}

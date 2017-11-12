@@ -1,0 +1,117 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!--Page Cover-->
+  	<section class="row page-cover" data-bgimage="{% static 'images/page-cover/5.jpg' %}">
+  		<div class="row m0">
+  			<div class="container">
+				<h2 class="page-title">services</h2>
+			</div>
+  		</div>
+  	</section>
+
+  	<!--Services-->
+  	<section class="row featured-service-blocks style2">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">We are Search Engine &amp; Social Media Experts</h2>
+  				<p>Marketing Solutions That Work</p>
+  			</div>
+  			<p class="contact-text text-center">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention of customers, not just for acquisition. And whatever we do, we always measure, always analyze and always innovate.</p>
+  			<div class="row">
+                {% for service in top_services %}
+  				<div class="col-sm-4 featured-service-block style3">
+					<div class="icon-holder"><img src="{{ service.image.url }}" alt=""></div>
+					<h3 class="this-title"><a href="/services/{{service.id}}/">{{ service.title }}</a></h3>
+					<p class="this-summary">{{ service.short_description }}</p>
+					<a href="/services/{{service.id}}/" class="more">read more</a>
+				</div>
+				{% endfor %}
+
+  			</div>
+  		</div>
+  	</section>
+
+  	<!--Product Based Services-->
+  	<section class="row product-based-services">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">Our product based services</h2>
+				<p>We are Search Engine &amp; Social Media Experts</p>
+  			</div>
+  			<div class="row product-based-service">
+  				<div class="col-sm-6 col-md-6 col-lg-8 img-holder">
+  					<img src="{% static 'images/service.png' %}" alt="" class="img-responsive">
+  				</div>
+  				<div class="col-sm-6 col-md-6 col-lg-4 text-holder">
+  					<p>We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention of customers, not just for acquisition. </p>
+  					<br>
+  					<p>And whatever we do, we always measure, always analyze and always innovate. There are many variations of passages of Lorem.</p>
+  					<a href="#" class="btn btn-primary">Read More</a>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
+  	<section class="row project-contact-banner">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-sm-9 text-holder">
+  					<h2>Awesome, I would like to start a Project Now.</h2>
+  					<p>We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you.</p>
+  				</div>
+  				<div class="col-sm-3 btn-holder text-right">
+  					<a href="contact.html" class="btn btn-outline white">Contact Us</a>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
+  	<!--Service Block-->
+  	<section class="row our-services">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">Our Services Keeps you Happy</h2>
+  				<p>We are Search Engine &amp; Social Media Experts</p>
+  			</div>
+
+  			<div class="service-blocks row">
+
+                {% for service  in center_services %}
+  				<div class="col-sm-4 service-block">
+  					<div class="row inner">
+						<div class="icon-holder row" data-icon="{{ service.color }}"><img src="{{ service.image.url }}" alt=""></div>
+						<h3 class="this-title">{{ service.title }}</h3>
+						<p class="this-summary">{{ service.short_description }}</p>
+						<a href="/services/{{service.id}}/" class="more">Read More</a>
+					</div>
+  				</div>
+  				{% endfor %}
+
+  			</div>
+
+  		</div>
+  	</section>
+
+  	<!--Service Block-->
+  	<section class="row more-services style2">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">We also Offer below Services</h2>
+  				<p>We are Search Engine &amp; Social Media Experts</p>
+  			</div>
+
+  			<div class="row more-service-blocks">
+                {% for service in all_services %}
+  				<div class="col-sm-4 service-block2">
+  					<div class="row icon-holder"><img src="{{ service.image.url }}" alt=""></div>
+  					<h4 class="this-title">{{ service.title }}</h4>
+					<p class="this-summary">{{ service.short_description }}</p>
+  				</div>
+                {% endfor %}
+  			</div>
+  		</div>
+  	</section>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'base/base.html' %}
+
+{%block content%}
+{%load static%}
+    {% load i18n %}
+
+<!--Page Cover-->
+  	<section class="row page-cover" data-bgimage="{% static 'images/page-cover/1.jpg' %}">
+  		<div class="row m0">
+  			<div class="container">
+				<h2 class="page-title">About Digital Agency</h2>
+			</div>
+  		</div>
+  	</section>
+
+  	<!--Brief About Us-->
+  	<section class="row about-briefs">
+  		<div class="container">
+  			<div class="row about-brief">
+  				<div class="col-sm-4 col-sm-push-8 img-block">
+  					<img src="{% static 'images/expertise-circle.png' %}" alt="" class="img-responsive">
+  				</div>
+  				<div class="col-sm-8 col-sm-pull-4 text-block">
+					<div class="row sectionTitle text-left">
+						<h2 class="this-title">Marketing Solutions That Work</h2>
+						<p>We are Search Engine &amp; Social Media Experts</p>
+					</div>
+
+					<p>We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention of customers, not just for acquisition. And whatever we do, we always measure, always analyze and always innovate. </p>
+					<br>
+					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+					<br>
+					<br class="hidden-lg">
+					<br class="hidden-lg">
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
+  	<!--Why Choose-->
+  	<section class="row why-choose">
+  		<div class="container">
+			<div class="row sectionTitle white">
+				<h2 class="this-title">Why Choose Digital Agency</h2>
+				<p>We are Search Engine &amp; Social Media Experts</p>
+			</div>
+
+			<div class="row">
+
+                {% for about_item in about_items %}
+				<div class="col-sm-4 choose-cause">
+					<div class="icon-holder row {{ about_item.color }}"><img src="{{ about_item.image.url }}" alt=""></div>
+					<h3 class="this-title">{{ about_item.title }}</h3>
+					<p class="this-about">{{ about_item.short_description }}</p>
+				</div>
+                {% endfor %}
+			</div>
+
+  		</div>
+  	</section>
+
+  	<!--Team Members-->
+  	<section class="team-members row">
+  		<div class="container">
+			<div class="row sectionTitle">
+				<h2 class="this-title">World’s Best at your Services</h2>
+				<p>We are Search Engine &amp; Social Media Experts</p>
+			</div>
+
+			<div class="row team-members-here">
+				<!--Member-->
+                {% for customer in customers %}
+				<div class="col-sm-4 col-md-3 team-member">
+					<div class="inner row">
+						<div class="img-holder row">
+							<img src="{{ customer.image.url }}" alt="">
+							<div class="hover-box">
+								<p>{{ customer.short_description }}</p>
+								<ul class="list-unstyled social-nav">
+                                    {% if customer.facebook_profile %}
+									<li><a href="{{ customer.facebook_profile }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        {% endif %}
+                                    {% if customer.twitter_profile %}
+									<li><a href="{{ customer.twitter_profile }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                        {% endif %}
+                                    {% if customer.linkedin_profile %}
+									<li><a href="{{ customer.linkedin_profile }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                    {% endif %}
+								</ul>
+							</div>
+							<div class="hover-trigger"><img src="{% static 'images/icons/service/10.png' %}" alt=""></div>
+						</div>
+						<h4 class="this-title">{{ customer.name }}</h4>
+						<h5 class="this-position">{{ customer.profession }}</h5>
+					</div>
+				</div>
+                {% endfor %}
+			</div>
+
+  		</div>
+  	</section>
+
+  	<!--About Blocks-->
+  	<section class="row about-blocks">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-sm-4 about-block">
+  					<div class="icon-holder"><img src="{% static 'images/icons/about/4.png' %}" alt=""></div>
+  					<h3 class="this-title">Excellent Support</h3>
+  					<p class="this-about">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention.</p>
+  				</div>
+  				<div class="col-sm-4 about-block">
+  					<div class="icon-holder"><img src="{% static 'images/icons/about/4.png' %}" alt=""></div>
+  					<h3 class="this-title">Awesome Team</h3>
+  					<p class="this-about">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention.</p>
+  				</div>
+  				<div class="col-sm-4 about-block">
+  					<div class="icon-holder"><img src="{% static 'images/icons/about/4.png' %}" alt=""></div>
+  					<h3 class="this-title">Faster Performance</h3>
+  					<p class="this-about">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention.</p>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
+{% endblock %}

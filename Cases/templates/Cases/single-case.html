@@ -1,0 +1,100 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!--Page Cover-->
+  	<section class="row page-cover" data-bgimage="images/page-cover/4.jpg">
+  		<div class="row m0">
+  			<div class="container">
+				<h2 class="page-title">{{ case.name }}</h2>
+			</div>
+  		</div>
+  	</section>
+
+  	<section class="row single-case">
+  		<div class="container">
+  			<div class="row case-title">
+  				<div class="col-sm-10">
+  					<div class="row sectionTitle text-left">
+						<h2 class="this-title">{{ case.short_description }}</h2>
+						<p>{{ case.category.name }}</p>
+					</div>
+  				</div>
+  			</div>
+  			<img src="{{ case.image.url }}" alt="" class="case-big-show img-responsive">
+  			<div class="row case-summary">
+                <p>{{ case.description }}</p>
+            </div>
+  		</div>
+  	</section>
+
+  	<section class="row our-services">
+  		<div class="container">
+  			<div class="row sectionTitle">
+  				<h2 class="this-title">Services we Offered for Project</h2>
+  				<p>We are Search Engine &amp; Social Media Experts</p>
+  			</div>
+
+  			<div class="service-blocks row">
+                {% for service in center_services %}
+  				<div class="col-sm-4 service-block">
+  					<div class="row inner">
+  						<div class="icon-holder row" data-icon="{{ service.color.index }}"><img src="{{ service.image.url }}" alt=""></div>
+						<h3 class="this-title">{{ service.title }}</h3>
+						<p class="this-summary">{{ service.short_description }}</p>
+						<a href="/services/{{ service.id }}" class="more">Read More</a>
+  					</div>
+  				</div>
+                {% endfor %}
+  			</div>
+
+  		</div>
+  	</section>
+
+  	<!--Featured Points-->
+  	<section class="row feature-point-this-case">
+  		<div class="container">
+  			<h2 class="feature-point-title">Feature Points for this Project</h2>
+  			<p class="feature-point-overview">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as tool for retention of customers, not just for acquisition. And whatever we do, we always measure, always analyze and always innovate.</p>
+  			<div class="row">
+  				<div class="col-sm-4 about-block style2">
+  					<div class="icon-holder"><img src="{% static 'images/icons/about/7.png' %}" alt=""></div>
+  					<h3 class="this-title">Excellent Support</h3>
+  					<p class="this-about">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention.</p>
+  				</div>
+  				<div class="col-sm-4 about-block style2">
+  					<div class="icon-holder"><img src="{% static 'images/icons/about/8.png' %}" alt=""></div>
+  					<h3 class="this-title">Awesome Team</h3>
+  					<p class="this-about">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention.</p>
+  				</div>
+  				<div class="col-sm-4 about-block style2">
+  					<div class="icon-holder"><img src="{% static 'images/icons/about/9.png' %}" alt=""></div>
+  					<h3 class="this-title">Faster Performance</h3>
+  					<p class="this-about">We’re also experts at finding the sweet spot between Google’s guidelines and what is commercially right for you. We have progressive theories on search as a tool for retention.</p>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
+  	<!--Related Case Studies-->
+  	<section class="row project-studies style2">
+  		<div class="container">
+  			<h3 class="related-case-title">Related Case Studies</h3>
+  			<div class="row">
+
+				{% for case in related_cases %}
+				<div class="col-sm-4 study-block2 style2">
+					<div class="inner row">
+						<img src="{{ case.image.url }}" alt="">
+						<div class="row this-title">
+							<a href="single-case.html" class="title-text">{{ case.name }}</a>
+							<a href="/cases/{{case.id}}/" class="target-page"><img src="{% static 'images/icons/service/10.png' %}" alt=""></a>
+						</div>
+					</div>
+				</div>
+                {% endfor %}
+  			</div>
+		</div>
+	</section>
+
+{% endblock %}

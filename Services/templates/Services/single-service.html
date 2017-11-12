@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!--Page Cover-->
+  	<section class="row page-cover" data-bgimage="images/page-cover/5.jpg">
+  		<div class="row m0">
+  			<div class="container">
+				<h2 class="page-title">Service Listing</h2>
+			</div>
+  		</div>
+  	</section>
+
+  	<!--Shop Content-->
+  	<section class="row">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-md-3 col-md-push-9 shop-sidebar"></div>
+  				<div class="col-md-9 col-md-pull-3 shop-content">
+  					<div class="row m0">
+  						<div class="media product product-details">
+							<div class="media-body">
+								<h3 class="pro-title">{{ service.title }}</h3>
+								<p class="pro-about">{{ service.short_description }}</p>
+							</div>
+						</div>
+  					</div>
+
+					<div class="row m0 shop-tabs">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="description">
+								<h4 class="tab-title">Service Description</h4>
+							<p>{{ service.description }}</p>
+                            </div>
+							<div role="tabpanel" class="tab-pane" id="reviews">...</div>
+						</div>
+					</div>
+
+  					<h3 class="related-products">Related Case Studies</h3>
+  					<div class="row">
+                        {% for case in related_cases %}
+  						<div class="col-sm-4 product">
+  							<div class="img-holder row">
+  								<img src="{{ case.image.url }}" alt="" class="product-img">
+  								<div class="hover-box">
+									<div class="btn-holder"><div class="row m0"><a href="/cases/{{case.id}}/" class="btn btn-outline blue">View</a></div></div>
+  								</div>
+  							</div>
+							<a href="/cases/{{case.id}}/"><h4 class="pro-title">{{ case.name }}</h4></a>
+							<p class="pro-about">{{ case.short_description }}</p>
+  						</div>
+                        {% endfor %}
+
+					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
+
+{% endblock %}

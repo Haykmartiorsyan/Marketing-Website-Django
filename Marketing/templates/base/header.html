@@ -1,0 +1,54 @@
+{% load static %}
+
+<!--Header-->
+  	<header class="top-bar row">
+  		<div class="container">
+  			<div class="welcome-message">Welcome to Digital Agency Theme</div>
+  			<ul class="nav top-nav">
+  				<li class="email"><a href="mailto:info@yoursite.com"><i class="fa fa-envelope-o"></i>info@yoursite.com</a></li>
+  				<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+  				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+  				<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+  				<li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+  				<li class="tel"><a href="#"><i class="fa fa-phone"></i>1 (234) 567-8901</a></li>
+  			</ul>
+  		</div>
+  	</header>
+
+  	<!--Navigation-->
+  	<nav class="navbar navbar-default navbar-static-top">
+  		<div class="container">
+  			<div class="navbar-header">
+  				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_nav" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+			 	</button>
+			 	<a href="{% url 'Home:index' %}" class="navbar-brand"><img src="{% static 'images/logo1.png' %}" alt=""></a>
+  			</div>
+			<div class="collapse navbar-collapse" id="main_nav">
+				<a href="#" class="btn btn-outline blue pull-right hidden-xs hidden-sm">free analysis</a>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="{% url 'Home:index' %}">Home</a>
+                    </li>
+					<li>
+                        <a href="{% url 'About:index' %}">About</a>
+                    </li>
+					<li>
+						<a href="{% url 'Services:index' %}">Services</a>
+					</li>
+					<li>
+						<a href="{% url 'Cases:index' %}">Cases</a>
+					</li>
+					<li>
+						<a href="{% url 'Blog:index' %}">Blog</a>
+					</li>
+					<li>
+                        <a href="{% url 'Contact:index' %}">contact</a>
+                    </li>
+				</ul>
+			</div>
+  		</div>
+  	</nav>
